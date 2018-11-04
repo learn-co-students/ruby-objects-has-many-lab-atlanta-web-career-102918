@@ -1,23 +1,28 @@
 class Author
-
-  def initialize(name) #like Mark
+  attr_accessor :name
+  def initialize(name)
     @name = name
+    @posts = []
   end
 
-  def name
-    @name
+  def add_post(post)
+    @posts << post
+    post.author = self
   end
 
-  def name=(name)
-    @name = name
+  def posts
+    @posts
   end
-end
 
-class Post
-  @@all = []#gonna hold all posts
-  def initialize(title) #like "how to cook ribeye steak"
-    @title = title
-    @@all << self #so "how to cook ribeye steak" is now in the all folder by title
+  def add_post_by_title(title)
+    cur_title = Post.new(title)
+    @posts << cur_title
+    cur_title.author = self
+  end
+
+  def self.post_count
+    Post.all.length
+    
   end
 
 end
